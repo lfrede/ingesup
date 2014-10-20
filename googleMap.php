@@ -28,5 +28,6 @@
               title:    config.location
           });
       }
+      
     </script>
 </html>
