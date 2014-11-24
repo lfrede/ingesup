@@ -39,7 +39,7 @@
   
   
         
-      $req = "SELECT latitude, longitude FROM event";
+      $req = "SELECT latitude, longitude, type FROM event";
       $res = $bdd->query($req);
       $postalAddress=array();
       $ligne = $res->fetchAll(PDO::FETCH_ASSOC);
@@ -70,6 +70,26 @@
           foreach ($postalAddress as $key => $value) {
             $latitude = $value["latitude"];
             $longitude = $value["longitude"];
+            $type = $value["type"];
+
+            if($type == "fete"){
+              $icone = "../images/fete.ico";
+            }
+            else if($type == "sportif"){
+              $icone = "../images/sportif.ico";
+            }
+            else if($type == "culturel"){
+              $icone = "../images/culturel.ico";
+            }
+            else if($type == "rencontre"){
+              $icone = "../images/rencontre.ico";
+            }
+            else if($type == "humanitaire"){
+              $icone = "../images/humanitaire.ico";
+            }
+            else if($type == "professionnel"){
+              $icone = "../images/professionnel.ico";
+            }
         ?>  
 
         var config = {
@@ -82,6 +102,7 @@
     
         var marqueur = new google.maps.Marker({
           position:latlng,
+          icon: <?php echo "'".$icone."'"; ?>,
           map: map
         });
 
@@ -93,5 +114,11 @@
     </script>
 
     <div id="map_canvas" style="width:980px; height:460px;"> </div>
+    <img src="../images/fete.ico"/> Fete
+    <img src="../images/culturel.ico"/> Culturel
+    <img src="../images/professionnel.ico"/> Professionnel
+    <img src="../images/sportif.ico"/> Sportif
+    <img src="../images/rencontre.ico"/> Rencontre
+    <img src="../images/humanitaire.ico"/> Humanitaire
   </body>
 </html>
